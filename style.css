@@ -1,0 +1,12 @@
+/* Positionnement des cercles */
+.top {
+    top: 10%; 
+    left: 60%;
+    transform: translateX(-50%);
+}
+
+.bottom {
+    top: 50%; 
+    left: 50%;
+    transform: translateX(-100%);
+}

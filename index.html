@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Locamaitre</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {},
+          colors: {
+            darkblue: "#003B5C",
+            lightblue: "#4A90E2",
+            white: "#fafaf9",
+            gray: "#f4f4f5",
+            graybg:"#d2d4d1",
+            gris: "#7A7272",
+            red: "#dc2626",
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <main
+      class="flex min-h-screen max-sm:pt-8"
+      style="
+        background: linear-gradient(
+          to bottom,
+          #003b5c,
+          #003b5c,
+          #003b5c,
+          #003b5c,
+          #003b5c,
+          #007cc2
+        );
+      "
+    >
+      <div
+        id="left"
+        class="w-1/2 min-h-screen flex justify-center md:items-center items-end max-sm:w-full"
+      >
+        <div class="w-full max-w-lg bg-blue-800 rounded-lg md:p-8">
+          <h2 class="md:hidden text-2xl font-semibold mx-2 mb-3 text-white">LocaMaitre</h2>
+          <h1
+            class="text-white text-3xl font-bold mb-3 md:mb-8 max-sm:px-8"
+          >
+            Bienvenue <span class="max-sm:hidden">à LocaMaitre</span> !
+          </h1>
+          <p class="md:hidden text-white font-semibold mb-8 px-8">
+            Veuillez vous connecter pour acceder à votre compte
+          </p>
+          <div class="max-sm:rounded-t-xl max-sm:bg-gray max-sm:py-4 max-sm:px-8">
+            <div class="flex justify-around bg-graybg md:hidden p-1 rounded-lg mb-3">
+              <div id="connexionContainer" class="w-1/2 py-2 text-center bg-white mx-2 rounded-lg">
+                <button id="connexion" type="button" class="font-bold text-darkblue ">Connexion</button>
+              </div>
+              <div id="inscriptionContainer" class="w-1/2 py-2  mx-2  text-center rounded-lg">
+                <button id="subscribe" type="button" class="">Inscription</button>
+              </div>
+            </div>
+            <form id="connectForm" class="">
+              <div class="mb-4">
+                <label
+                  class="block text-sm font-medium mb-2 md:text-white"
+                  for="email"
+                  >Nom d'utilisateur ou Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="xxx@gmail.com"
+                  class="w-full px-4 py-2 md:bg-darkblue border max-sm:border-gris text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-400 max-sm:text-gris"
+                  required=""
+                />
+                <span class="text-red" id="emailError"></span>
+              </div>
+
+              <div class="mb-4">
+                <label
+                  class="block   text-sm font-medium mb-2 md:text-white"
+                  for="password"
+                  >Mot de passe</label
+                >
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="******"
+                  class="w-full px-4 py-2 md:bg-darkblue border text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-400 max-sm:text-gris"
+                  required=""
+                />
+              </div>
+
+              <div class="flex items-center justify-between mb-6">
+                <label class="flex items-center md:text-white text-sm">
+                  <input type="checkbox" class="mr-2 text-blue-400 rounded" />
+                  Se souvenir de moi
+                </label>
+                <a href="#" class="text-lightblue text-sm"
+                  >Mot de passe oublié ?</a
+                >
+              </div>
+
+              <button
+                type="button"
+                id="connect"
+                class="w-full bg-lightblue text-white font-bold py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+              >
+                Se connecter
+              </button>
+
+              <div class="flex items-center my-4">
+                <div class="flex-grow border-t border-white"></div>
+                <span class="mx-4 text-white">Ou</span>
+                <div class="flex-grow border-t border-white"></div>
+              </div>
+
+              <div class="flex justify-center space-x-6">
+                <button class="text-white">
+                  <img
+                    src="./src/SocialMedia/chercher.png"
+                    alt="Google"
+                    class="w-6 h-6"
+                  />
+                </button>
+                <button class="text-white">
+                  <img
+                    src="./src/SocialMedia/facebook(1).png"
+                    alt="Facebook"
+                    class="w-6 h-6"
+                  />
+                </button>
+                <button class="text-white">
+                  <img
+                    src="./src/SocialMedia/logo-apple.png"
+                    alt="Apple"
+                    class="w-6 h-6"
+                  />
+                </button>
+              </div>
+
+              <p class="text-center font-semibold text-gris md:text-white mt-6 max-sm:hidden">
+                Vous n'avez pas de compte ?&nbsp;&nbsp;&nbsp; 
+                <a href="#" id="inscriptionLink" class="text-lightblue font-medium hover:underline"
+                  >Inscrivez-vous</a
+                >
+              </p>
+            </form>
+            <form id="inscriptionForm" class="hidden">
+              <div class="mb-4">
+                <label
+                  class="block text-sm font-medium mb-2 md:text-white"
+                  for="userName"
+                  >Nom d'utilisateur ou Email</label
+                >
+                <input
+                  type="email"
+                  id="userName"
+                  placeholder="Votre Nom"
+                  class="w-full px-4 py-2 md:bg-darkblue border max-sm:border-gris text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-400 max-sm:text-gris"
+                  required=""
+                />
+              </div>
+              <div class="mb-4">
+                <label
+                  class="block text-sm font-medium mb-2 md:text-white"
+                  for="userEmail"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="emailInscription"
+                  placeholder="xxx@gmail.com"
+                  class="w-full px-4 py-2 md:bg-darkblue border max-sm:border-gris text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-400 max-sm:text-gris"
+                  required=""
+                />
+                <span class="text-red" id="emailErrorInscription"></span>
+              </div>
+
+              <div class="mb-4">
+                <label
+                  class="block   text-sm font-medium mb-2 md:text-white"
+                  for="motdepasse"
+                  >Mot de passe</label
+                >
+                <input
+                  type="password"
+                  id="motdepasse"
+                  placeholder="******"
+                  class="w-full px-4 py-2 md:bg-darkblue border text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-400 max-sm:text-gris"
+                  required=""
+                />
+              </div>
+              <div class="mb-4">
+                <label
+                  class="block   text-sm font-medium mb-2 md:text-white"
+                  for="role"
+                  >Role</label
+                >
+                <select
+                  type="password"
+                  id="role"
+                  placeholder="******"
+                  class="w-full px-4 py-2 md:bg-darkblue border text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-400 max-sm:text-gris"
+                  required=""
+                >
+                <option value="Compte Personnel">Compte personnel</option>
+                <option value="Entreprise">Entreprise</option>
+                </select>
+              </div>
+
+              <button
+                type="button"
+                id="creerCompte"
+                class="w-full bg-lightblue text-white font-bold py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+              >
+                Créer un compte
+              </button>
+
+              <div class="flex items-center my-4">
+                <div class="flex-grow border-t md:border-white"></div>
+                <span class="mx-4 md:text-white">Ou</span>
+                <div class="flex-grow border-t md:border-white"></div>
+              </div>
+
+              <div class="flex justify-center space-x-6">
+                <button class="text-white">
+                  <img
+                    src="./src/SocialMedia/chercher.png"
+                    alt="Google"
+                    class="w-6 h-6"
+                  />
+                </button>
+                <button class="text-white">
+                  <img
+                    src="./src/SocialMedia/facebook(1).png"
+                    alt="Facebook"
+                    class="w-6 h-6"
+                  />
+                </button>
+                <button class="text-white">
+                  <img
+                    src="./src/SocialMedia/logo-apple.png"
+                    alt="Apple"
+                    class="w-6 h-6"
+                  />
+                </button>
+              </div>
+
+              <p class="text-center font-semibold text-gris md:text-white mt-6 max-sm:hidden">
+                Vous avez un compte ?&nbsp;&nbsp;&nbsp; 
+                <a href="#" id="connectLink" class="text-lightblue font-medium hover:underline"
+                  > Se connecter</a
+                >
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="right" class="w-1/2 md:h-screen max-sm:hidden">
+        <div class="w-full relative h-screen flex justify-center items-center">
+          <div class="w-96 h-96 absolute overflow-hidden rounded-full top">
+            <img
+              src="./src/Connexion/tierra-mallorca-rgJ1J8SDEAY-unsplash.jpg"
+              alt="Image 1"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="w-80 h-80 absolute overflow-hidden rounded-full bottom">
+            <img
+              src="./src/Connexion/ivan-kazlouskij-CMKyzGzYdr8-unsplash.jpg"
+              alt="Image 2"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="./connexion.js"></script>
+  </body>
+</html>

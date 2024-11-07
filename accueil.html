@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Locamaitre</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {},
+          colors: {
+            darkblue: "#003B5C",
+            lightblue: "#4A90E2",
+            white: "#fafaf9",
+            gray: "#f4f4f5",
+            gris: "#7A7272",
+            red: "#dc2626",
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <nav class="bg-darkblue z-50 border-gray-200">
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+      >
+        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-white"
+            >LocaMaitre</span
+          >
+        </a>
+        <div
+          class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+        >
+          <button
+            type="button"
+            class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <span class="sr-only">Open user menu</span>
+            <img
+              class="w-8 h-8 rounded-full object-cover"
+              src="./michael-dam-mEZ3PoFGs_k-unsplash.jpg"
+              alt="user photo"
+            />
+          </button>
+          <!-- Dropdown menu -->
+          <div
+            class="fixed top-11 z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+            id="user-dropdown"
+          >
+            <div class="px-4 py-3">
+              <span class="block text-sm text-gray-900">Bonnie Green</span>
+              <span class="block text-sm text-gray-500 truncate"
+                >name@flowbite.com</span
+              >
+            </div>
+            <ul class="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Sign out</a
+                >
+              </li>
+            </ul>
+          </div>
+          <button
+            data-collapse-toggle="navbar-user"
+            id="mobileMenu"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="items-center bg-darkblue justify-between hidden w-full md:flex md:w-auto md:order-1"
+          id="myMenu"
+        >
+          <ul
+            class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-white rounded-lg bg-darkblue md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0"
+          >
+            <li>
+              <a
+                href="./accueil.html"
+                class="block py-2 px-3 text-white rounded md:p-0 font-bold border-b-2"
+                aria-current="page"
+                >Accueil</a
+              >
+            </li>
+            <li>
+              <a
+                href="/LocaMaitre/Adminpage.html"
+                class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:p-0"
+                >Réservations</a
+              >
+            </li>
+            <li>
+              <a
+                href="./profile.html"
+                class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:p-0"
+                >Profil</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section
+        id="searchSection"
+        class="w-full min-h-32 bg-lightblue content-around"
+      >
+        <div id="searchField">
+          <form class="max-w-lg mx-auto max-sm:mx-2">
+            <div class="flex">
+              <label
+                for="search-dropdown"
+                class="mb-2 text-sm font-medium text-gray-900 sr-only e"
+                >Your Email</label
+              >
+              <button
+                id="filtreButton"
+                data-dropdown-toggle="dropdown"
+                class="flex-shrink-0 z-10 inline-flex bg-darkblue items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-gray-100 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100"
+                type="button"
+              >
+                Catégories
+                <svg
+                  class="w-2.5 h-2.5 ms-2.5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+              <div
+                id="filtre"
+                class="fixed top-32 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+              >
+                <ul
+                  class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdown-button"
+                >
+                  <li>
+                    <button
+                      type="button"
+                      class="inline-flex w-full px-4 py-2 hover:bg-gray-100"
+                    >
+                      Meuble
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="inline-flex w-full px-4 py-2 hover:bg-gray-100"
+                    >
+                      Villa
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="inline-flex w-full px-4 py-2 hover:bg-gray-100"
+                    >
+                      Appartement
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="inline-flex w-full px-4 py-2 hover:bg-gray-100"
+                    >
+                      Moto
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <div class="relative w-full">
+                <input
+                  type="search"
+                  id="search-dropdown"
+                  class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"
+                  placeholder="Recherche"
+                  required
+                />
+                <button
+                  type="submit"
+                  class="absolute top-0 end-0 p-2.5 bg-darkblue text-sm font-medium h-full text-white rounded-e-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                  <span class="sr-only">Search</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div>
+          <p class="text-white font-semibold text-center">
+            Nous sommes ravis de vous retouver
+            <span class="font-bold text-2xl">Wiam !</span>
+          </p>
+        </div>
+      </section>
+      <section class="md:px-8">
+        <!--pour vous-->
+        <section id="pourVous" class="px-8 py-4">
+          <div class="flex justify-between">
+            <div class="text-lg font-bold py-2">Pour Vous</div>
+            <div class="py-2">
+              <button class="font-semibold">Voir tout</button>
+            </div>
+          </div>
+          <div class="relative">
+            <div
+              id="pourVousPrev"
+              class="top-40 bg-darkblue w-9 h-9 rounded-full flex justify-center items-center absolute"
+            >
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m15 19-7-7 7-7"
+                />
+              </svg>
+            </div>
+            <div id="lesItems-pourVous" class="flex justify-around px-8">
+              <div
+                id="pourVous1"
+                class="w-1/5 max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <a href="#">
+                  <img
+                    class="rounded-t-lg h-56 w-full object-cover"
+                    src="./src/frames-for-your-heart-2d4lAQAlbDA-unsplash.jpg"
+                    alt=""
+                  />
+                </a>
+                <div class="p-5">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                    >
+                      Villa à Louer
+                    </h3>
+                    <h4
+                      class="mb-2 text-xl font-semibold tracking-tight text-gray-900"
+                    >
+                      MAD 15000
+                    </h4>
+                  </a>
+                  <p class="mb-3 font-normal text-gray-700">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequatur, incidunt!
+                  </p>
+                </div>
+              </div>
+              <div
+                id="pourVous2"
+                class="w-1/5 max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <a href="#">
+                  <img
+                    class="rounded-t-lg h-56 w-full object-cover"
+                    src="./src/logan-weaver-lgnwvr-WHq4l_ooxZk-unsplash.jpg"
+                    alt=""
+                  />
+                </a>
+                <div class="p-5">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                    >
+                      Moto Cross
+                    </h3>
+                    <h4
+                      class="mb-2 text-xl font-semibold tracking-tight text-gray-900"
+                    >
+                      MAD 300
+                    </h4>
+                  </a>
+                  <p class="mb-3 font-normal text-gray-700">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequatur, incidunt!
+                  </p>
+                </div>
+              </div>
+              <div
+                id="pourVous3"
+                class="w-1/5 max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <a href="#">
+                  <img
+                    class="rounded-t-lg h-56 w-full object-cover"
+                    src="./src/roxanne-joncas-DxLGT3bEKkE-unsplash.jpg"
+                    alt=""
+                  />
+                </a>
+                <div class="p-5">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                    >
+                      Appartement à Louer
+                    </h3>
+                    <h4
+                      class="mb-2 text-xl font-semibold tracking-tight text-gray-900"
+                    >
+                      MAD 15000
+                    </h4>
+                  </a>
+                  <p class="mb-3 font-normal text-gray-700">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequatur, incidunt!
+                  </p>
+                </div>
+              </div>
+              <div
+                id="pourVous4"
+                class="w-1/5 bg-white max-sm:hidden max-sm:w-full border border-gray-200 rounded-lg shadow"
+              >
+                <a href="#">
+                  <img
+                    class="rounded-t-lg h-56 w-full object-cover"
+                    src="./src/timothy-buck-psrloDbaZc8-unsplash.jpg"
+                    alt=""
+                  />
+                </a>
+                <div class="p-5">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                    >
+                      Chambre à Louer
+                    </h3>
+                    <h4
+                      class="mb-2 text-xl font-semibold tracking-tight text-gray-900"
+                    >
+                      MAD 2000
+                    </h4>
+                  </a>
+                  <p class="mb-3 font-normal text-gray-700">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequatur, incidunt!
+                  </p>
+                </div>
+              </div>
+              <div
+                id="pourVous5"
+                class="w-1/5 bg-white hidden max-sm:block max-sm:w-full border border-gray-200 rounded-lg shadow"
+              >
+                <a href="#">
+                  <img
+                    class="rounded-t-lg h-56 w-full object-cover"
+                    src="./src/kirill-9uH-hM0VwPg-unsplash.jpg"
+                    alt=""
+                  />
+                </a>
+                <div class="p-5">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                    >
+                      Meuble à Louer
+                    </h3>
+                    <h4
+                      class="mb-2 text-xl font-semibold tracking-tight text-gray-900"
+                    >
+                      MAD 500
+                    </h4>
+                  </a>
+                  <p class="mb-3 font-normal text-gray-700">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequatur, incidunt!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              id="pourVousNext"
+              class="absolute right-0 top-40 bg-darkblue w-9 h-9 rounded-full flex justify-center items-center"
+            >
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m9 5 7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+        </section>
+        <!--fin pour vous-->
+        <!--Catégories-->
+        <section id="catégories" class="px-8 py-4">
+          <div class="flex justify-between">
+            <div class="text-lg font-bold py-2">Catégories</div>
+            <div class="py-2">
+              <button class="font-semibold">Voir tout</button>
+            </div>
+          </div>
+          <div class="relative">
+            <div
+              id="categoriePrev"
+              class="top-20 bg-darkblue w-9 h-9 rounded-full flex justify-center items-center absolute"
+            >
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m15 19-7-7 7-7"
+                />
+              </svg>
+            </div>
+            <div id="lesCategoris" class="flex justify-around px-8">
+              <div
+                id="categorie1"
+                class="mx-2 w-1/5 max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <div class="bg-gray flex justify-around py-8 rounded-t-lg">
+                  <a href="#">
+                    <img
+                      class="rounded-full border-2 h-16 w-16 object-cover p-2"
+                      src="./src/voiture(1).png"
+                      alt=""
+                    />
+                  </a>
+                </div>
+                <div class="px-2 py-1 bg-lightblue rounded-b-lg">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-lg text-center font-bold tracking-tight text-white"
+                    >
+                      Voiture
+                    </h3>
+                  </a>
+                </div>
+              </div>
+              <div
+                id="categorie2"
+                class="mx-2 w-1/5 max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <div class="bg-gray flex justify-around py-8 rounded-t-lg">
+                  <a href="#">
+                    <img
+                      class="rounded-full border-2 h-16 w-16 object-cover p-2"
+                      src="./src/canape(1).png"
+                      alt=""
+                    />
+                  </a>
+                </div>
+                <div class="px-2 py-1 bg-lightblue rounded-b-lg">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-lg text-center font-bold tracking-tight text-white"
+                    >
+                      Meuble
+                    </h3>
+                  </a>
+                </div>
+              </div>
+              <div
+                id="categorie3"
+                class="mx-2 w-1/5 max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <div class="bg-gray flex justify-around py-8 rounded-t-lg">
+                  <a href="#">
+                    <img
+                      class="rounded-full border-2 h-16 w-16 object-cover p-2"
+                      src="./src/ville(1).png"
+                      alt=""
+                    />
+                  </a>
+                </div>
+                <div class="px-2 py-1 bg-lightblue rounded-b-lg">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-lg text-center font-bold tracking-tight text-white"
+                    >
+                      Villa
+                    </h3>
+                  </a>
+                </div>
+              </div>
+              <div
+                id="categorie4"
+                class="mx-2 w-1/5 max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <div class="bg-gray flex justify-around py-8 rounded-t-lg">
+                  <a href="#">
+                    <img
+                      class="rounded-full border-2 h-16 w-16 object-cover p-2"
+                      src="./src/chambre(1).png"
+                      alt=""
+                    />
+                  </a>
+                </div>
+                <div class="px-2 py-1 bg-lightblue rounded-b-lg">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-lg text-center font-bold tracking-tight text-white"
+                    >
+                      Chambre
+                    </h3>
+                  </a>
+                </div>
+              </div>
+              <div
+                id="categorie5"
+                class="mx-2 w-1/5 max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <div class="bg-gray flex justify-around py-8 rounded-t-lg">
+                  <a href="#">
+                    <img
+                      class="rounded-full border-2 h-16 w-16 object-cover p-2"
+                      src="./src/moto(1).png"
+                      alt=""
+                    />
+                  </a>
+                </div>
+                <div class="px-2 py-1 bg-lightblue rounded-b-lg">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-lg text-center font-bold tracking-tight text-white"
+                    >
+                      Moto
+                    </h3>
+                  </a>
+                </div>
+              </div>
+              <div
+                id="categorie6"
+                class="mx-2 w-1/5 hidden max-sm:block max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <div class="bg-gray flex justify-around py-8 rounded-t-lg">
+                  <a href="#">
+                    <img
+                      class="rounded-full border-2 h-16 w-16 object-cover p-2"
+                      src="./src/camion-dexpedition.png"
+                      alt=""
+                    />
+                  </a>
+                </div>
+                <div class="px-2 py-1 bg-lightblue rounded-b-lg">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-lg text-center font-bold tracking-tight text-white"
+                    >
+                      Camion
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              id="categorieNext"
+              class="absolute right-0 top-20 bg-darkblue w-9 h-9 rounded-full flex justify-center items-center"
+            >
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m9 5 7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+        </section>
+        <!--fin catégories-->
+        <!--Populaire-->
+        <section id="populaire" class="px-8 py-4">
+          <div class="flex justify-between">
+            <div class="text-lg font-bold py-2">Populaire en ce moment</div>
+            <div class="py-2">
+              <button class="font-semibold">Voir tout</button>
+            </div>
+          </div>
+          <div class="relative">
+            <div
+              id="populairePrev"
+              class="top-40 bg-darkblue w-9 h-9 rounded-full flex justify-center items-center absolute"
+            >
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m15 19-7-7 7-7"
+                />
+              </svg>
+            </div>
+            <div id="lesItems-pourVous" class="flex justify-around px-8">
+              <div
+                id="populaire1"
+                class="w-1/5 max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <a href="#">
+                  <img
+                    class="rounded-t-lg h-56 w-full object-cover"
+                    src="./src/Populaire/domino-studio-geeZzrAXyMQ-unsplash.jpg"
+                    alt=""
+                  />
+                </a>
+                <div class="p-5">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                    >
+                      Camionnette
+                    </h3>
+                    <h4
+                      class="mb-2 text-xl font-semibold tracking-tight text-gray-900"
+                    >
+                      MAD 250,99
+                    </h4>
+                  </a>
+                  <p class="mb-3 font-normal text-gray-700">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequatur, incidunt!
+                  </p>
+                </div>
+              </div>
+              <div
+                id="populaire2"
+                class="w-1/5 max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <a href="#">
+                  <img
+                    class="rounded-t-lg h-56 w-full object-cover"
+                    src="./src/Populaire/harley-davidson-wxSb4-Lxt3Y-unsplash.jpg"
+                    alt=""
+                  />
+                </a>
+                <div class="p-5">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                    >
+                      Moto C-90
+                    </h3>
+                    <h4
+                      class="mb-2 text-xl font-semibold tracking-tight text-gray-900"
+                    >
+                      MAD 400
+                    </h4>
+                  </a>
+                  <p class="mb-3 font-normal text-gray-700">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequatur, incidunt!
+                  </p>
+                </div>
+              </div>
+              <div
+                id="populaire3"
+                class="w-1/5 max-sm:hidden max-sm:w-full bg-white border border-gray-200 rounded-lg shadow"
+              >
+                <a href="#">
+                  <img
+                    class="rounded-t-lg h-56 w-full object-cover"
+                    src="./src/Populaire/jarek-ceborski-jn7uVeCdf6U-unsplash.jpg"
+                    alt=""
+                  />
+                </a>
+                <div class="p-5">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                    >
+                      Appart
+                    </h3>
+                    <h4
+                      class="mb-2 text-xl font-semibold tracking-tight text-gray-900"
+                    >
+                      MAD 300
+                    </h4>
+                  </a>
+                  <p class="mb-3 font-normal text-gray-700">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequatur, incidunt!
+                  </p>
+                </div>
+              </div>
+              <div
+                id="populaire4"
+                class="w-1/5 bg-white max-sm:hidden max-sm:w-full border border-gray-200 rounded-lg shadow"
+              >
+                <a href="#">
+                  <img
+                    class="rounded-t-lg h-56 w-full object-cover"
+                    src="./src/Populaire/christopher-jolly-GqbU78bdJFM-unsplash.jpg"
+                    alt=""
+                  />
+                </a>
+                <div class="p-5">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                    >
+                      Chambre
+                    </h3>
+                    <h4
+                      class="mb-2 text-xl font-semibold tracking-tight text-gray-900"
+                    >
+                      MAD 2000
+                    </h4>
+                  </a>
+                  <p class="mb-3 font-normal text-gray-700">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequatur, incidunt!
+                  </p>
+                </div>
+              </div>
+              <div
+                id="populaire5"
+                class="w-1/5 bg-white hidden max-sm:block max-sm:w-full border border-gray-200 rounded-lg shadow"
+              >
+                <a href="#">
+                  <img
+                    class="rounded-t-lg h-56 w-full object-cover"
+                    src="./src/Populaire/edoardo-bortoli-t9jzJHi63lU-unsplash.jpg"
+                    alt=""
+                  />
+                </a>
+                <div class="p-5">
+                  <a href="#">
+                    <h3
+                      class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                    >
+                      Villa
+                    </h3>
+                    <h4
+                      class="mb-2 text-xl font-semibold tracking-tight text-gray-900"
+                    >
+                      MAD 15000
+                    </h4>
+                  </a>
+                  <p class="mb-3 font-normal text-gray-700">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequatur, incidunt!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              id="populaireNext"
+              class="absolute right-0 top-40 bg-darkblue w-9 h-9 rounded-full flex justify-center items-center"
+            >
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m9 5 7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+        </section>
+        <!--fin pour vous-->
+      </section>
+    </main>
+    <footer class="py-4 bg-darkblue flex justify-center">
+      <p class="text-white font-semibold">
+        @2024 - LocaMaitre - Tous droits reservés
+      </p>
+    </footer>
+    <script src="./accueilScript.js"></script>
+  </body>
+</html>

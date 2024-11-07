@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocaMaitre - Profil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {},
+          colors: {
+            darkblue: "#003B5C",
+            lightblue: "#4A90E2",
+            white: "#fafaf9",
+            gray: "#f4f4f5",
+            gris: "#7A7272",
+            red: "#dc2626",
+          },
+        },
+      };
+    </script>
+    <style>
+      .reservation-item img {
+        width: 100%;
+        border-radius: 6px 6px 0px 0px;
+      }
+
+      @media (min-width: 640px) {
+        /* Apply styles only on screens larger than 640px (sm breakpoint) */
+        .reservation-item img {
+          height: 100px;
+          object-fit: cover;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray">
+    <!-- Barre de navigation -->
+    <nav class="bg-darkblue z-50 border-gray-200">
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+      >
+        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-white"
+            >LocaMaitre</span
+          >
+        </a>
+        <div
+          class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+        >
+          <button
+            type="button"
+            class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <span class="sr-only">Open user menu</span>
+            <img
+              class="w-8 h-8 rounded-full object-cover"
+              src="./michael-dam-mEZ3PoFGs_k-unsplash.jpg"
+              alt="user photo"
+            />
+          </button>
+          <!-- Dropdown menu -->
+          <div
+            class="fixed top-11 z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+            id="user-dropdown"
+          >
+            <div class="px-4 py-3">
+              <span class="block text-sm text-gray-900">Bonnie Green</span>
+              <span class="block text-sm text-gray-500 truncate"
+                >name@flowbite.com</span
+              >
+            </div>
+            <ul class="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Sign out</a
+                >
+              </li>
+            </ul>
+          </div>
+          <button
+            data-collapse-toggle="navbar-user"
+            id="mobileMenu"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="items-center bg-darkblue justify-between hidden w-full md:flex md:w-auto md:order-1"
+          id="myMenu"
+        >
+          <ul
+            class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-white rounded-lg bg-darkblue md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0"
+          >
+            <li>
+              <a
+                href="./accueil.html"
+                class="block py-2 px-3 text-white rounded md:p-0"
+                aria-current="page"
+                >Accueil</a
+              >
+            </li>
+            <li>
+              <a
+                href="/LocaMaitre/Adminpage.html"
+                class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:p-0"
+                >Réservations</a
+              >
+            </li>
+            <li>
+              <a
+                href="./profile.html"
+                class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:p-0 font-bold border-b-2"
+                >Profil</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="max-w-4xl mx-auto p-10">
+      <!-- Photo & Nom complet -->
+      <section class="bg-white rounded-lg shadow-md p-6 mb-6 relative">
+        <button
+          id="editProfileButton"
+          onclick="editProfile()"
+          class="text-white bg-lightblue hover:bg-darkblue focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center absolute top-3 right-4"
+        >
+          <img
+            src="./src/Profil/edit.png"
+            alt="Pen icon"
+            class="inline w-4 h-4 mr-1"
+          />
+          éditer
+        </button>
+        <button
+          id="saveProfileButton"
+          onclick="saveProfile()"
+          class="hidden text-white bg-lightblue hover:bg-darkblue focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center absolute top-3 right-4"
+        >
+          sauvegarder
+        </button>
+        <div class="flex items-center">
+          <input
+            id="profile-pic-input"
+            type="file"
+            accept="image/*"
+            class="hidden"
+          />
+          <img
+            id="profile-pic-display"
+            src="./src/Profil/profilepic.jpg"
+            class="rounded-full w-20 h-20 bg-gray-100 overflow-hidden cursor-pointer transition-all duration-200 ease-in-out hover:scale-110 hover:shadow-xl"
+            alt="Photo de profil"
+          />
+          <div class="ml-10">
+            <span id="full-name-display" class="text-xl text-darkblue font-bold"
+              >Wiam Najib</span
+            >
+            <input
+              type="text"
+              id="full-name-input"
+              class="hidden text-darkblue font-medium border border-lightblue w-40 rounded-lg px-2 py-1 w-full"
+              value="Wiam Najib"
+            />
+          </div>
+        </div>
+      </section>
+      <!-- Informations Personelles -->
+      <p class="text-xl text-darkblue font-bold mb-6">
+        Informations Personelles
+      </p>
+      <section class="bg-white rounded-lg shadow-md p-10 mb-6 relative">
+        <button
+          id="editButton"
+          onclick="edit()"
+          class="text-white bg-lightblue hover:bg-darkblue focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center absolute top-3 right-4"
+        >
+          <img
+            src="./src/Profil/edit.png"
+            alt="Pen icon"
+            class="inline w-4 h-4 mr-1"
+          />
+          éditer
+        </button>
+        <button
+          id="saveButton"
+          onclick="save()"
+          class="hidden text-white bg-lightblue hover:bg-darkblue focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center absolute top-3 right-4"
+        >
+          sauvegarder
+        </button>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="username" class="block font-bold text-darkblue mb-3"
+              >Nom d'utilisateur</label
+            >
+            <span
+              id="username-display"
+              class="inline-block text-input font-medium border border-lightblue bg-white rounded-lg border-2 sm:w-60 w-full px-2 py-1"
+              >@wiamnajib_</span
+            >
+            <input
+              type="text"
+              id="username"
+              class="hidden text-input font-medium border border-lightblue rounded-lg px-2 py-1 sm:w-60 w-full px-2 py-1"
+              value="@wiamnajib_"
+            />
+          </div>
+          <div>
+            <label for="email" class="block font-bold text-darkblue mb-3"
+              >Email</label
+            >
+            <span
+              id="email-display"
+              class="inline-block text-input font-medium border border-lightblue bg-white rounded-lg border-2 sm:w-60 w-full px-2 py-1"
+              >wiamnajib@gmail.com</span
+            >
+            <input
+              type="email"
+              id="email"
+              class="hidden text-input font-medium border border-lightblue rounded-lg px-2 py-1 sm:w-60 w-full"
+              value="wiamnajib@gmail.com"
+            />
+          </div>
+          <div>
+            <label for="phone" class="block font-bold text-darkblue mb-3"
+              >Téléphone</label
+            >
+            <span
+              id="phone-display"
+              class="inline-block text-input font-medium border border-lightblue bg-white rounded-lg border-2 sm:w-60 w-full px-2 py-1"
+              >061012435678</span
+            >
+            <input
+              type="tel"
+              id="phone"
+              class="hidden sm:w-60 w-30 text-input font-medium border border-lightblue rounded-lg px-2 py-1 w-full"
+              value="061012435678"
+            />
+          </div>
+          <div>
+            <label for="password" class="block font-bold text-darkblue mb-3"
+              >Mot de passe</label
+            >
+            <span
+              id="password-display"
+              class="inline-block text-input font-medium border border-lightblue bg-white rounded-lg border-2 sm:w-60 w-full px-2 py-1"
+            ></span>
+            <input
+              type="password"
+              id="password"
+              class="hidden text-input font-medium border border-lightblue sm:w-60 w-full rounded-lg px-2 py-1 w-full"
+              value="najib"
+            />
+            <div class="flex mt-4">
+              <input
+                id="togglePassword"
+                type="checkbox"
+                class="shrink-0 mt-0.5"
+              />
+              <label for="togglePassword" class="text-sm text-gris ms-3"
+                >Afficher le mot de passe</label
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Réservations -->
+      <section class="bg-white rounded-lg shadow-md p-10 mb-6 relative">
+        <div class="flex justify-between items-center mb-6">
+          <p class="text-xl text-darkblue font-bold">Mes réservations</p>
+          <div class="relative inline-block">
+            <button
+              id="dropdownDefault"
+              data-dropdown-toggle="dropdown"
+              class="text-white bg-lightblue hover:bg-darkblue focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+              type="button"
+            >
+              Filtrer
+              <svg
+                class="w-4 h-4 ml-2"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.6001 7.20005L9.0001 10.8L5.4001 7.20005"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div
+              id="dropdown"
+              class="absolute left-0 mt-2 z-10 hidden w-56 p-3 bg-white rounded-lg shadow"
+            >
+              <h6 class="mb-3 text-sm font-medium text-gris">Category</h6>
+              <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                <li class="flex items-center">
+                  <input
+                    id="appartement-filter"
+                    type="checkbox"
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2"
+                  />
+                  <label
+                    for="appartement-filter"
+                    class="ml-2 text-sm font-medium text-darkblue"
+                  >
+                    Appartement
+                  </label>
+                </li>
+                <li class="flex items-center">
+                  <input
+                    id="voiture-filter"
+                    type="checkbox"
+                    value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2"
+                  />
+                  <label
+                    for="voiture-filter"
+                    class="ml-2 text-sm font-medium text-darkblue"
+                  >
+                    Voiture
+                  </label>
+                </li>
+                <li class="flex items-center">
+                  <input
+                    id="moto-filter"
+                    type="checkbox"
+                    value=""
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2"
+                  />
+                  <label
+                    for="moto-filter"
+                    class="ml-2 text-sm font-medium text-darkblue"
+                  >
+                    Moto
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div
+            class="reservation-item bg-gray border border-darkblue rounded-lg"
+            data-category="Appartement"
+          >
+            <div>
+              <img src="./src/Profil/1.png" class="w-full" />
+            </div>
+            <div>
+              <h4 class="font-bold ml-4 mt-2">Appartement</h4>
+              <p class="text-sm text-gris ml-4">En cours</p>
+            </div>
+            <div class="flex justify-center">
+              <button class="bg-red text-white px-2 py-1 m-3 rounded-lg">
+                Annuler réservation
+              </button>
+            </div>
+          </div>
+          <div
+            class="reservation-item bg-gray border border-darkblue rounded-lg"
+            data-category="Voiture"
+          >
+            <div>
+              <img src="./src/Profil/4.png" class="w-full" />
+            </div>
+            <div>
+              <h4 class="font-bold ml-4 mt-2">Fiat 500</h4>
+              <p class="text-sm text-gris ml-4">En cours</p>
+            </div>
+            <div class="flex justify-center">
+              <button class="bg-red text-white px-2 py-1 m-3 rounded-lg">
+                Annuler réservation
+              </button>
+            </div>
+          </div>
+          <div
+            class="reservation-item bg-gray border border-darkblue rounded-lg"
+            data-category="Moto"
+          >
+            <div>
+              <img src="./src/Profil/3.png" class="w-full" />
+            </div>
+            <div>
+              <h4 class="font-bold ml-4 mt-2">Moto</h4>
+              <p class="text-sm text-gris ml-4">En cours</p>
+            </div>
+            <div class="flex justify-center">
+              <button class="bg-red text-white px-2 py-1 m-3 rounded-lg">
+                Annuler réservation
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="h-12 bg-darkblue text-white text-center mt-9 pt-2">
+        @2024 - LocaMaitre - Tous droits reservés
+      </div>
+    </footer>
+    <script src="./accueilScript.js"></script>
+    <script src="./profil.js"></script>
+  </body>
+</html>

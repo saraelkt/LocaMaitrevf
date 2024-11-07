@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {},
+          colors: {
+            darkblue: "#003B5C",
+            lightblue: "#4A90E2",
+            white: "#fafaf9",
+            gray: "#f4f4f5",
+            gris: "#7A7272",
+            red: "#dc2626",
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <nav class="bg-darkblue z-50 border-gray-200">
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+      >
+        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-white"
+            >LocaMaitre</span
+          >
+        </a>
+        <div
+          class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+        >
+          <button
+            type="button"
+            class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <span class="sr-only">Open user menu</span>
+            <img
+              class="w-8 h-8 rounded-full object-cover"
+              src="./michael-dam-mEZ3PoFGs_k-unsplash.jpg"
+              alt="user photo"
+            />
+          </button>
+          <!-- Dropdown menu -->
+          <div
+            class="fixed top-11 z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+            id="user-dropdown"
+          >
+            <div class="px-4 py-3">
+              <span class="block text-sm text-gray-900">Bonnie Green</span>
+              <span class="block text-sm text-gray-500 truncate"
+                >name@flowbite.com</span
+              >
+            </div>
+            <ul class="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Sign out</a
+                >
+              </li>
+            </ul>
+          </div>
+          <button
+            data-collapse-toggle="navbar-user"
+            id="mobileMenu"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="items-center bg-darkblue justify-between hidden w-full md:flex md:w-auto md:order-1"
+          id="myMenu"
+        >
+          <ul
+            class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-white rounded-lg bg-darkblue md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0"
+          >
+            <li>
+              <a
+                href="/LocaMaitre/accueil.html"
+                class="block py-2 px-3 text-white rounded md:p-0"
+                aria-current="page"
+                >Accueil</a
+              >
+            </li>
+            <li>
+              <a
+                href="/LocaMaitre/Adminpage.html"
+                class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:p-0 font-bold border-b-2"
+                >Tableau de Bord</a
+              >
+            </li>
+            <li>
+              <a
+                href="/LocaMaitre/profile.html"
+                class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:p-0"
+                >Profil</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section class="md:mx-8">
+      <h1 class="text-darkblue font-bold text-xl mt-6 ml-10 inline-block">
+        Analyse et Persectives
+      </h1>
+      <div class="flex justify-around px-8 max-sm:flex-col">
+        <!--Nouveau clien -->
+        <div class="md:w-2/5 bg-gray drop-shadow-lg px-8 py-4 my-5">
+          <div class="flex justify-between gap-32 mt-3">
+            <label class="text-gris font-semibold"> Nouveaux Clients </label>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
+              />
+            </svg>
+          </div>
+          <label class="font-bold text-4xl mt-5 mb-16">65</label><br />
+          <div class="flex mt-5">
+            <div class="bg-darkblue w-3/5 h-7 rounded-l-lg"></div>
+            <div class="bg-lightblue w-2/5 h-7 rounded-r-lg"></div>
+          </div>
+          <div class="w-64 mb-6">
+            <span class="block text-gray-700 font-semibold mb-1 mt-5"
+              >Croissance Actuelle</span
+            >
+          </div>
+        </div>
+        <!-- Réparation des locations -->
+        <div class="md:w-2/5 bg-gray drop-shadow-lg px-8 py-4 my-5">
+          <div class="flex justify-between gap-20 mt-3">
+            <label class="text-gris font-semibold"
+              >Répartitions des Locations
+            </label>
+
+            <svg
+              class="h-9"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              fill="#000000"
+              version="1.1"
+              id="Layer_1"
+              viewBox="0 0 512.001 512.001"
+              xml:space="preserve"
+            >
+              <g>
+                <g>
+                  <rect
+                    x="79.304"
+                    y="327.686"
+                    transform="matrix(0.9808 -0.1951 0.1951 0.9808 -63.9303 24.606)"
+                  />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M461.369,156.643l-22.411,4.458L301.06,60.672c0.853-3.301,1.307-6.761,1.307-10.324c0-22.773-18.527-41.3-41.3-41.3    c-22.773,0-41.3,18.527-41.3,41.3c0,4.983,0.888,9.763,2.512,14.19L20.365,244.365L0,248.416l50.632,254.536l461.369-91.772    L461.369,156.643z M242.511,87.229c5.583,2.821,11.884,4.42,18.556,4.42c8.115,0,15.683-2.362,22.074-6.42l115.258,83.94    l-319.181,63.49L242.511,87.229z M134.553,420.468l-43.78-24.65l6.297,31.656l-29.815,5.931l-12.748-64.092l-12.469-62.677    l86.389-17.184l15.432,77.585l-31.213,6.209l36.823,20.732L134.553,420.468z M172.445,411.011l-24.934-125.355l87.799-17.465    l5.932,29.816l-57.986,11.534l3.571,17.955l28.43-5.655l5.93,29.816l-28.429,5.654l3.571,17.955l57.985-11.533l5.932,29.816    L172.445,411.011z M308.069,385.502l-29.816,5.931l-26.026-130.84l68.342,47.918l-11.241-56.512l29.816-5.931l26.025,130.839    l-68.342-47.918L308.069,385.502z M441.886,358.884l-29.815,5.931l-19.285-96.952l-29.699,5.908l-5.932-29.815l89.213-17.746    l5.932,29.815l-29.699,5.908L441.886,358.884z"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="sm:flex justify-between items-center">
+            <div class="max-sm:flex max-sm:justify-between">
+              <div class="flex items-center">
+                <div class="w-3 h-3 bg-lightblue rounded-full"></div>
+                <div class="pl-2">Voitures</div>
+              </div>
+              <div class="flex items-center">
+                <div class="w-3 h-3 bg-gris rounded-full"></div>
+                <div class="pl-2">Appartements</div>
+              </div>
+            </div>
+
+            <canvas
+              id="myChart2"
+              style="width: 100%; max-width: 280px"
+            ></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-around px-8 max-sm:flex-col">
+        <div class="md:w-2/5 bg-gray drop-shadow-lg px-8 py-4 my-5">
+          <label class="text-gris font-semibold"> Commandes </label><br />
+
+          <label class="font-bold text-4xl ml-7 mt-7">1,302</label><br />
+          <div class="flex max-sm:flex-col">
+            <div>
+              <div class="flex gap-2 ml-3 mt-6">
+                <label class="h-3 w-3 bg-lightblue self-center"></label>
+                <label class="font-bold"> 40% Prépayé</label>
+              </div>
+              <div class="flex gap-2 ml-3 mt-6">
+                <label class="h-3 w-3 bg-gris self-center"></label>
+                <label class="font-bold"> 60% Postpayé</label>
+              </div>
+            </div>
+
+            <canvas
+              class="self-start"
+              id="myChart1"
+              style="width: 100%; max-width: 250px"
+            ></canvas>
+          </div>
+        </div>
+        <div class="md:w-2/5 bg-gray drop-shadow-lg px-8 py-4 my-5">
+          <label class="text-gris font-semibold text-center">
+            Activités Globale des Clients </label
+          ><br />
+          <canvas
+            id="myChart"
+            style="width: 68px; max-height: 180px; max-width: 100%"
+          ></canvas>
+        </div>
+      </div>
+    </section>
+
+    <div class="sm:flex sm:items-center sm:justify-between sm:mx-8 md:px-12">
+      <h2
+        class="text-darkblue font-bold text-xl mt-6 inline-block relative mb-4 max-sm-8"
+      >
+        Mes Articles
+      </h2>
+      <div class="flex justify-center items-end gap-4">
+        <div
+          class="transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 flex bg-lightblue rounded-md w-24 h-8 gap-2 font-semibold"
+        >
+          <!-- <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg> -->
+          <svg
+            class="self-center w-4 ml-2"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13.0003 9.99956H10.0003M10.0003 9.99956H7.00033M10.0003 9.99956V12.9996M10.0003 9.99956L10.0003 6.99956M18 5L18 15.0001C18 16.6569 16.6569 18.0001 15 18.0001H5C3.34315 18.0001 2 16.6569 2 15.0001V5C2 3.34315 3.34315 2 5 2H15C16.6569 2 18 3.34315 18 5Z"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          <button
+            id="ajouter"
+            class="transition delay-150 duration-300 text-white ease-in-out"
+          >
+            Ajouter
+          </button>
+        </div>
+
+        <!-- <div>
+            <select
+              id="categorie"
+              class="relative flex justify-center items-center transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 font-semibold bg-lightblue rounded-md w-24 h-8 text-white mt-2 max-w-xs cursor-pointer"
+            >
+              <option value="AUCUN " selected disabled>Filtrer</option>
+
+              <option value="Voiture">Voiture</option>
+              <option value="Apparts">Appartements</option>
+              <option value="Moto">Moto</option>
+              <option value="Meuble">Meuble</option>
+            </select>
+          </div> -->
+        <div class="relative inline-block">
+          <button
+            id="dropdownDefault"
+            data-dropdown-toggle="dropdown"
+            class="text-white bg-lightblue hover:bg-darkblue focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center h-8"
+            type="button"
+          >
+            Filtrer
+            <svg
+              class="w-4 h-4 ml-2"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.6001 7.20005L9.0001 10.8L5.4001 7.20005"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <!-- Dropdown menu -->
+          <div
+            id="dropdown"
+            class="absolute left-0 mt-2 z-10 hidden w-56 p-3 bg-white rounded-lg shadow"
+          >
+            <h6 class="mb-3 text-sm font-medium text-gris">Category</h6>
+            <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+              <li class="flex items-center">
+                <input
+                  id="appartement-filter"
+                  type="checkbox"
+                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2"
+                />
+                <label
+                  for="appartement-filter"
+                  class="ml-2 text-sm font-medium text-darkblue"
+                >
+                  Appartement
+                </label>
+              </li>
+              <li class="flex items-center">
+                <input
+                  id="voiture-filter"
+                  type="checkbox"
+                  value=""
+                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2"
+                />
+                <label
+                  for="voiture-filter"
+                  class="ml-2 text-sm font-medium text-darkblue"
+                >
+                  Voiture
+                </label>
+              </li>
+              <li class="flex items-center">
+                <input
+                  id="moto-filter"
+                  type="checkbox"
+                  value=""
+                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2"
+                />
+                <label
+                  for="moto-filter"
+                  class="ml-2 text-sm font-medium text-darkblue"
+                >
+                  Moto
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Les articles-->
+    <div class="flex justify-center">
+      <div
+        id="gridclass"
+        class="grid gap-7 mt-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <div
+          data-target="grid1"
+          data-category="Appartement"
+          class="border border-black rounded-md w-60 h-auto reservation-item"
+        >
+          <img
+            class="w-60 h-48 object-cover"
+            src="./src/Administrator/house1.png"
+            alt="Image du meuble à louer"
+          />
+          <div data-goal="grid1" class="ml-4 mb-2">
+            <label class="font-bold">Appartement</label><br />
+            <label>MAD 350</label>
+          </div>
+          <div data-goal-form="grid1" class="ml-4 mb-2 hidden">
+            <form>
+              <input type="text" class="font-bold" placeholder="Nom" /><br />
+              <input type="text" placeholder="Prix" />
+              <button
+                type="button"
+                class="save transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+              >
+                Sauvegarder
+              </button>
+            </form>
+          </div>
+          <div class="flex justify-center gap-3 mb-2">
+            <button class="mod text-white bg-lightblue rounded-md w-24">
+              Modifier
+            </button>
+            <button
+              class="supp transition delay-150 duration-300 ease-in-out hover:bg-red-700 hover:scale-105 bg-red text-white rounded-md w-24"
+            >
+              Suprrimer
+            </button>
+          </div>
+        </div>
+        <div
+          data-target="grid2"
+          class="border border-black w-60 h-auto reservation-item"
+          data-category="Appartement"
+        >
+          <img
+            class="w-60 h-48 object-cover"
+            src="./src/Administrator/house2.png"
+            alt=""
+          />
+          <div data-goal="grid2" class="ml-4 mb-2">
+            <label class="font-bold">Appartements</label><br />
+            <label>MAD 450</label>
+          </div>
+          <div data-goal-form="grid2" class="ml-4 mb-2 hidden">
+            <form>
+              <input type="text" class="font-bold" placeholder="Nom" /><br />
+              <input type="text" placeholder="Prix" />
+              <button
+                type="button"
+                class="save transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+              >
+                Sauvegarder
+              </button>
+            </form>
+          </div>
+          <div class="flex justify-center gap-3 mb-2">
+            <button
+              class="mod transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+            >
+              Modifier
+            </button>
+            <button
+              class="supp transition delay-150 duration-300 ease-in-out hover:bg-red hover:scale-105 bg-red text-white rounded-md w-24"
+            >
+              Suprrimer
+            </button>
+          </div>
+        </div>
+        <div
+          data-target="grid3"
+          class="border rounded-md border-black w-60 h-auto reservation-item"
+          data-category="Appartement"
+        >
+          <img
+            class="w-60 h-48 object-cover"
+            src="./src/Administrator/house3.png"
+            alt=""
+          />
+          <div data-goal="grid3" class="ml-4 mb-2">
+            <label class="font-bold">Appartement</label><br />
+            <label>MAD 450</label>
+          </div>
+          <div data-goal-form="grid3" class="ml-4 mb-2 hidden">
+            <form>
+              <input type="text" class="font-bold" placeholder="Nom" /><br />
+              <input type="text" placeholder="Prix" />
+              <button
+                type="button"
+                class="save transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+              >
+                Sauvegarder
+              </button>
+            </form>
+          </div>
+          <div class="flex justify-center gap-3 mb-2">
+            <button
+              class="mod transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+            >
+              Modifier
+            </button>
+            <button
+              class="supp transition delay-150 duration-300 ease-in-out hover:bg-red hover:scale-105 bg-red text-white rounded-md w-24"
+            >
+              Suprrimer
+            </button>
+          </div>
+        </div>
+        <div
+          data-target="grid4"
+          data-category="Appartement"
+          class="border rounded-md border-black w-60 h-auto reservation-item"
+        >
+          <img
+            class="w-60 h-48 object-cover"
+            src="./src/Administrator/house4.png"
+            alt=""
+          />
+          <div data-goal="grid4" class="ml-4 mb-2">
+            <label class="font-bold">Appartement</label><br />
+            <label>MAD 500</label>
+          </div>
+          <div data-goal-form="grid4" class="ml-4 mb-2 hidden">
+            <form>
+              <input type="text" class="font-bold" placeholder="Nom" /><br />
+              <input type="text" placeholder="Prix" />
+              <button
+                type="button"
+                class="save transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+              >
+                Sauvegarder
+              </button>
+            </form>
+          </div>
+          <div class="flex justify-center gap-3 mb-2">
+            <button
+              class="mod transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+            >
+              Modifier
+            </button>
+            <button
+              class="supp transition delay-150 duration-300 ease-in-out hover:bg-red hover:scale-105 bg-red text-white rounded-md w-24"
+            >
+              Suprrimer
+            </button>
+          </div>
+        </div>
+        <div
+          data-target="grid5"
+          data-category="Voiture"
+          class="border rounded-md border-black w-60 h-auto reservation-item"
+        >
+          <img
+            class="w-60 h-48 object-cover"
+            src="./src/Administrator/kia.jpg"
+            alt=""
+          />
+          <div data-goal="grid5" class="ml-4 mb-2">
+            <label class="font-bold">Voiture à louer</label><br />
+            <label>MAD 450</label>
+          </div>
+          <div data-goal-form="grid5" class="ml-4 mb-2 hidden">
+            <form>
+              <input type="text" class="font-bold" placeholder="Nom" /><br />
+              <input type="text" placeholder="Prix" />
+              <button
+                type="button"
+                class="save transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+              >
+                Sauvegarder
+              </button>
+            </form>
+          </div>
+          <div class="flex justify-center gap-3 mb-2">
+            <button
+              class="mod transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+            >
+              Modifier
+            </button>
+            <button
+              class="supp transition delay-150 duration-300 ease-in-out hover:bg-red hover:scale-105 bg-red text-white rounded-md w-24"
+            >
+              Suprrimer
+            </button>
+          </div>
+        </div>
+        <div
+          data-target="grid6"
+          class="border rounded-md border-black w-60 h-auto reservation-item"
+          data-category="Voiture"
+        >
+          <img
+            class="w-64 h-48 object-contain"
+            src="./src/Administrator/heyundai.jpg"
+            alt=""
+          />
+          <div data-goal="grid6" class="ml-4 mb-2">
+            <label class="font-bold">Voiture à louer</label><br />
+            <label>MAD 350</label>
+          </div>
+          <div data-goal-form="grid6" class="ml-4 mb-2 hidden">
+            <form>
+              <input type="text" class="font-bold" placeholder="Nom" /><br />
+              <input type="text" placeholder="Prix" />
+              <button
+                type="button"
+                class="save transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+              >
+                Sauvegarder
+              </button>
+            </form>
+          </div>
+          <div class="flex justify-center gap-3 mb-2">
+            <button
+              type="button"
+              class="mod transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+            >
+              Modifier
+            </button>
+            <button
+              class="supp transition delay-150 duration-300 ease-in-out hover:bg-red hover:scale-105 bg-red text-white rounded-md w-24"
+            >
+              Suprrimer
+            </button>
+          </div>
+        </div>
+        <div
+          data-target="grid7"
+          data-category="Moto"
+          class="border rounded-md border-black w-60 h-auto reservation-item"
+        >
+          <img
+            class="w-60 h-48 object-cover"
+            src="./src/Administrator/moto.jpg"
+            alt=""
+          />
+          <div data-goal="grid7" class="ml-4 mb-2">
+            <label class="font-bold">Moto à louer</label><br />
+            <label>MAD 450</label>
+          </div>
+          <div data-goal-form="grid7" class="ml-4 mb-2 hidden">
+            <form>
+              <input type="text" class="font-bold" placeholder="Nom" /><br />
+              <input type="text" placeholder="Prix" />
+              <button
+                type="button"
+                class="save transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+              >
+                Sauvegarder
+              </button>
+            </form>
+          </div>
+          <div class="flex justify-center gap-3 mb-2">
+            <button
+              class="mod transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+            >
+              Modifier
+            </button>
+            <button
+              class="supp transition delay-150 duration-300 ease-in-out hover:bg-red hover:scale-105 bg-red text-white rounded-md w-24"
+            >
+              Suprrimer
+            </button>
+          </div>
+        </div>
+        <div
+          data-target="grid8"
+          class="border rounded-md border-black w-60 h-auto reservation-item"
+          data-category="Voiture"
+        >
+          <img
+            class="w-60 h-48 object-contain"
+            src="./src/Administrator/peugot.jpg"
+            alt=""
+          />
+          <div data-goal="grid8" class="ml-4 mb-2">
+            <label class="change font-bold">Voiture à louer</label><br />
+            <label class="change">MAD 250.99</label>
+          </div>
+          <div data-goal-form="grid8" class="ml-4 mb-2 hidden">
+            <form>
+              <input type="text" class="font-bold" placeholder="Nom" /><br />
+              <input type="text" placeholder="Prix" />
+              <button
+                type="button"
+                class="save transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+              >
+                Sauvegarder
+              </button>
+            </form>
+          </div>
+          <div class="flex justify-center gap-3 mb-2">
+            <button
+              class="mod transition delay-150 duration-300 ease-in-out hover:bg-lightblue hover:scale-105 text-white bg-lightblue rounded-md w-24"
+            >
+              Modifier
+            </button>
+            <button
+              class="supp transition delay-150 duration-300 ease-in-out hover:bg-red hover:scale-105 bg-red text-white rounded-md w-24"
+            >
+              Suprrimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-12 bg-darkblue text-white text-center mt-9 pt-2">
+      @2024 - LocaMaitre - Tous droits reservés
+    </div>
+
+    <script src="Admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./accueilScript.js"></script>
+  </body>
+</html>
